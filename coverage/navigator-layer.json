@@ -1,0 +1,145 @@
+{
+  "name": "SOC Detection Engineering Lab - Coverage",
+  "versions": {
+    "attack": "13",
+    "navigator": "4.9.1",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Techniques covered by the Sigma rules in this lab (score 100 = a tested rule exists in rules/).",
+  "sorting": 0,
+  "techniques": [
+    {
+      "techniqueID": "T1003.001",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "LSASS Memory Access from Non-System Process (Sysmon 10)",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1059.001",
+      "tactic": "execution",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "PowerShell Encoded or Obfuscated Command Execution",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1021.002",
+      "tactic": "lateral-movement",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "PsExec-Style Lateral Movement Service Creation (7045)",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1558.003",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Kerberoasting - Service Ticket Request with RC4 Encryption (4769)",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1003.006",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "DCSync - Directory Replication from Non-DC Account (4662)",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1550.002",
+      "tactic": "lateral-movement",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Pass-the-Hash Style Logon - Explicit Credentials (4648 / 4624 Type 9)",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1053.005",
+      "tactic": "persistence",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Scheduled Task Creation with Suspicious Content (4698)",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1547.001",
+      "tactic": "persistence",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Registry Run Key Persistence via Sysmon (Event ID 13)",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1110.001",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Linux SSH Brute Force - Multiple Failed Passwords",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1003.008",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Linux Sudo Access to Shadow File or Root Shell",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1548.003",
+      "tactic": "privilege-escalation",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Linux Sudo Access to Shadow File or Root Shell",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1071.004",
+      "tactic": "command-and-control",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Possible DNS Tunneling - Abnormally Long Subdomain Queries",
+      "enabled": true,
+      "metadata": []
+    },
+    {
+      "techniqueID": "T1190",
+      "tactic": "initial-access",
+      "score": 100,
+      "color": "#e60d0d",
+      "comment": "Web Exploitation Attempt - SQL Injection or Web Shell in Access Logs",
+      "enabled": true,
+      "metadata": []
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#ffffff",
+      "#e60d0d"
+    ],
+    "minValue": 0,
+    "maxValue": 100
+  },
+  "legendItems": [],
+  "metadata": [],
+  "links": [],
+  "showTacticRowBackground": false,
+  "tacticRowBackground": "#dddddd",
+  "selectTechniquesAcrossTactics": true,
+  "hideDisabled": false
+}

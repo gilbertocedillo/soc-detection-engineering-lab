@@ -1,0 +1,33 @@
+title: Registry Run Key Persistence via Sysmon (Event ID 13)
+id: a1b2c3d4-0000-4000-8000-000000000008
+status: test
+description: Detects Sysmon Event ID 13 (Registry SetValue) writing under the Windows Run / RunOnce autostart keys
+  pointing at user-writable paths or script interpreters - a ubiquitous persistence technique (T1547.001).
+references:
+- https://attack.mitre.org/techniques/T1547/001/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.persistence
+- attack.t1547.001
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 13
+    TargetObject|contains:
+    - \CurrentVersion\Run
+    - \CurrentVersion\RunOnce
+    Details|contains:
+    - \Temp\
+    - \AppData\
+    - powershell
+    - cmd.exe
+    - .vbs
+    - .js
+  condition: selection
+falsepositives:
+- Legitimate software installers registering autostart entries - validate signer and path
+- User-level autostart entries under AppData from collaboration tools (tune by signer in production)
+level: medium

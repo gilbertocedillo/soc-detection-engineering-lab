@@ -1,0 +1,34 @@
+title: Linux Sudo Access to Shadow File or Root Shell
+id: a1b2c3d4-0000-4000-8000-000000000010
+status: test
+description: Detects sudo execution reading /etc/shadow or spawning an interactive root shell (su, bash via sudo)
+  - credential access and privilege-escalation behavior rarely performed interactively by legitimate automation
+  (T1003.008, T1548.003).
+references:
+- https://attack.mitre.org/techniques/T1003/008/
+- https://attack.mitre.org/techniques/T1548/003/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.credential_access
+- attack.privilege_escalation
+- attack.t1003.008
+- attack.t1548.003
+logsource:
+  product: linux
+  service: sudo
+detection:
+  selection_shadow:
+    message|contains:
+    - COMMAND=/bin/cat /etc/shadow
+    - COMMAND=/usr/bin/cat /etc/shadow
+  selection_shell:
+    message|contains:
+    - COMMAND=/bin/su
+    - COMMAND=/usr/bin/su -
+    - COMMAND=/bin/bash
+  condition: selection_shadow or selection_shell
+falsepositives:
+- Break-glass admin activity - verify against change tickets
+- Forensic acquisition performed by the IR team itself
+level: high

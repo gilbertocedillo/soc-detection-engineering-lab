@@ -1,0 +1,32 @@
+title: PsExec-Style Lateral Movement Service Creation (7045)
+id: a1b2c3d4-0000-4000-8000-000000000003
+status: test
+description: Detects Windows Event ID 7045 (a service was installed) where the service name or image path matches
+  PsExec-style artifacts (PSEXESVC), a classic SMB lateral-movement pattern (T1021.002).
+references:
+- https://attack.mitre.org/techniques/T1021/002/
+- https://attack.mitre.org/techniques/T1569/002/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.lateral_movement
+- attack.t1021.002
+logsource:
+  product: windows
+  service: system
+detection:
+  selection:
+    EventID: 7045
+    ServiceName:
+    - PSEXESVC
+    - PSEXESVC-*
+  selection_path:
+    EventID: 7045
+    ImagePath|contains:
+    - PsExec
+    - PSEXESVC
+  condition: selection or selection_path
+falsepositives:
+- Authorized admin use of Sysinternals PsExec for remote administration
+- Remote management software using similar service names
+level: high

@@ -1,0 +1,5 @@
+2026-10-20T10:12:01Z WS-FIN-014 dns_query qtype=A query=mail.corp.local answer=10.0.2.15
+2026-10-20T10:12:44Z WS-FIN-014 dns_query qtype=TXT query=aGVsbG8td29ybGQtZXhmaWx0cmF0aW9uLXBheWxvYWQtMDAx.evil-c2.example.net answer=-
+2026-10-20T10:13:02Z WS-FIN-014 dns_query qtype=TXT query=SGVsbG9Xb3JsZEhlbGxvV29ybGRIZWxsb1dvcmxkMTIzNDU2Nzg5MA.evil-c2.example.net answer=-
+2026-10-20T10:14:19Z WS-FIN-014 dns_query qtype=A query=update.microsoft.com answer=20.60.1.1
+2026-10-20T10:15:00Z WS-FIN-014 dns_query qtype=AAAA query=fonts.googleapis.com answer=2607:f8b0::1

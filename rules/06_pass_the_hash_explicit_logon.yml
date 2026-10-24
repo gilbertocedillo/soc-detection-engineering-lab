@@ -1,0 +1,30 @@
+title: Pass-the-Hash Style Logon - Explicit Credentials (4648 / 4624 Type 9)
+id: a1b2c3d4-0000-4000-8000-000000000006
+status: test
+description: 'Detects logons consistent with Pass-the-Hash: Event ID 4648 (logon attempted using explicit credentials)
+  to a remote host, or 4624 LogonType 9 (NewCredentials) with Negotiate/NTLM in a workstation context (T1550.002).'
+references:
+- https://attack.mitre.org/techniques/T1550/002/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.lateral_movement
+- attack.defense_evasion
+- attack.t1550.002
+logsource:
+  product: windows
+  service: security
+detection:
+  selection_4648:
+    EventID: 4648
+  selection_4624_t9:
+    EventID: 4624
+    LogonType: 9
+    AuthenticationPackageName:
+    - Negotiate
+    - NTLM
+  condition: selection_4648 or selection_4624_t9
+falsepositives:
+- RunAs usage by administrators
+- Scheduled tasks or services configured with explicit stored credentials
+level: high

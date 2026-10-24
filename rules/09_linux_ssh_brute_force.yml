@@ -1,0 +1,24 @@
+title: Linux SSH Brute Force - Multiple Failed Passwords
+id: a1b2c3d4-0000-4000-8000-000000000009
+status: test
+description: Selection matches each SSH failed-password event in auth.log; alerting requires the aggregation threshold
+  in the companion SPL/KQL (>= 10 failures / 5 minutes / source IP). Detects password-guessing brute force against
+  SSH (T1110.001).
+references:
+- https://attack.mitre.org/techniques/T1110/001/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.credential_access
+- attack.t1110.001
+logsource:
+  product: linux
+  service: sshd
+detection:
+  selection_msg:
+    message|contains: Failed password for
+  condition: selection_msg
+falsepositives:
+- Users mistyping passwords - the threshold (>= 10 / 5 min / IP) is what separates noise from attack
+- Misconfigured monitoring checks using SSH
+level: medium

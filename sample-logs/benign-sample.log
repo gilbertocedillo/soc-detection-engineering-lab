@@ -1,0 +1,12 @@
+{"timestamp": "2026-10-20T07:00:11Z", "host": "WS-HR-003", "source": "security", "EventID": 4624, "TargetUserName": "m.garcia", "LogonType": 2, "AuthenticationPackageName": "Kerberos", "IpAddress": "10.0.4.40"}
+{"timestamp": "2026-10-20T07:01:02Z", "host": "WS-HR-003", "source": "security", "EventID": 4688, "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "CommandLine": "powershell.exe -File C:\\Scripts\\weekly-backup.ps1", "User": "CORP\\m.garcia"}
+{"timestamp": "2026-10-20T07:05:44Z", "host": "WS-HR-003", "source": "system", "EventID": 7045, "ServiceName": "Google Update Service", "ImagePath": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe", "AccountName": "LocalSystem"}
+{"timestamp": "2026-10-20T07:09:10Z", "host": "DC01", "source": "security", "EventID": 4769, "TargetUserName": "m.garcia@CORP.LOCAL", "ServiceName": "cifs/fileserver.corp.local", "TicketEncryptionType": "0x12", "IpAddress": "10.0.4.40"}
+Oct 20 07:12:21 bastion01 sshd[1801]: Accepted password for m.garcia from 10.0.5.20 port 60100 ssh2
+Oct 20 07:13:02 bastion01 sshd[1805]: Failed password for m.garcia from 10.0.5.20 port 60104 ssh2
+Oct 20 07:13:40 bastion01 sshd[1809]: Accepted password for m.garcia from 10.0.5.20 port 60110 ssh2
+Oct 20 07:20:15 bastion01 sudo:  m.garcia : TTY=pts/0 ; PWD=/home/m.garcia ; USER=root ; COMMAND=/usr/bin/systemctl status apache2
+2026-10-20T07:22:01Z WS-HR-003 dns_query qtype=A query=portal.office.com answer=52.96.1.1
+2026-10-20T07:22:05Z WS-HR-003 dns_query qtype=A query=www.google.com answer=142.250.1.1
+10.0.5.20 - - [20/Oct/2026:07:25:11 +0000] "GET /home HTTP/1.1" 200 9210 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X)"
+10.0.5.20 - - [20/Oct/2026:07:25:14 +0000] "GET /about?ref=nav HTTP/1.1" 200 4102 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X)"

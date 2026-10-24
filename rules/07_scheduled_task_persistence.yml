@@ -1,0 +1,33 @@
+title: Scheduled Task Creation with Suspicious Content (4698)
+id: a1b2c3d4-0000-4000-8000-000000000007
+status: test
+description: Detects creation of a scheduled task via Security Event ID 4698 where the task content runs a script
+  interpreter, a user-writable path, or an encoded command - a common persistence and execution mechanism (T1053.005).
+references:
+- https://attack.mitre.org/techniques/T1053/005/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.persistence
+- attack.execution
+- attack.t1053.005
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4698
+    TaskContent|contains:
+    - powershell
+    - cmd.exe
+    - wscript
+    - cscript
+    - mshta
+    - \Temp\
+    - \AppData\
+    - ' -enc '
+  condition: selection
+falsepositives:
+- Software updaters creating tasks that call scripts from vendor folders
+- Legitimate admin automation - review TaskName and author
+level: medium

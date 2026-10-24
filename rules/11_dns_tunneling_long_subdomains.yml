@@ -1,0 +1,25 @@
+title: Possible DNS Tunneling - Abnormally Long Subdomain Queries
+id: a1b2c3d4-0000-4000-8000-000000000011
+status: test
+description: 'Detects DNS queries whose first subdomain label is abnormally long (>= 40 characters), consistent
+  with DNS tunneling used for command-and-control or exfiltration (T1071.004). Heuristic: requires per-domain baselining
+  before production alerting.'
+references:
+- https://attack.mitre.org/techniques/T1071/004/
+- https://attack.mitre.org/techniques/T1048/003/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.command_and_control
+- attack.exfiltration
+- attack.t1071.004
+logsource:
+  category: dns
+detection:
+  selection:
+    query|re: ^[A-Za-z0-9+/=_-]{40,}\.
+  condition: selection
+falsepositives:
+- CDN, OCSP and some SaaS services legitimately using long subdomain labels - baseline per parent domain
+- Encrypted DNS resolvers can obscure this telemetry
+level: medium

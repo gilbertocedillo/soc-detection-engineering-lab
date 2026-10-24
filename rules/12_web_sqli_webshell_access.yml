@@ -1,0 +1,37 @@
+title: Web Exploitation Attempt - SQL Injection or Web Shell in Access Logs
+id: a1b2c3d4-0000-4000-8000-000000000012
+status: test
+description: Detects SQL injection patterns (UNION SELECT, OR 1=1, scanner user agents) and web-shell style requests
+  (script URL with cmd= parameter) in HTTP access logs - exploitation of a public-facing application (T1190).
+references:
+- https://attack.mitre.org/techniques/T1190/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.initial_access
+- attack.t1190
+logsource:
+  product: apache
+  service: httpd
+detection:
+  selection_sqli:
+    message|contains:
+    - UNION SELECT
+    - ''' OR ''1''=''1'
+    - ' OR 1=1'
+    - sleep(
+    - benchmark(
+  selection_ua:
+    user_agent|contains:
+    - sqlmap
+    - nikto
+  selection_shell:
+    url|contains:
+    - cmd=
+    - shell.php
+    - c99.php
+  condition: selection_sqli or selection_ua or selection_shell
+falsepositives:
+- Authorized vulnerability scanning (allowlist scanner IPs)
+- Developers testing queries in staging environments sharing the log pipeline
+level: high

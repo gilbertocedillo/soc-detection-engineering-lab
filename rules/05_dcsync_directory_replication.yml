@@ -1,0 +1,30 @@
+title: DCSync - Directory Replication from Non-DC Account (4662)
+id: a1b2c3d4-0000-4000-8000-000000000005
+status: test
+description: Detects Event ID 4662 directory access carrying the DS-Replication-Get-Changes GUIDs from an account
+  that is not a domain controller machine account. This is the telemetry signature of a DCSync attack used to extract
+  password hashes (T1003.006).
+references:
+- https://attack.mitre.org/techniques/T1003/006/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.credential_access
+- attack.t1003.006
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4662
+    Properties|contains:
+    - 1131f6aa-9c07-11d1-f79f-00c04fc2d2d2
+    - 1131f6ad-9c07-11d1-f79f-00c04fc2d2d2
+    - 89e95b76-444d-4c62-991a-0facbeda640c
+  filter_dc_accounts:
+    SubjectUserName|endswith: $
+  condition: selection and not filter_dc_accounts
+falsepositives:
+- Legitimate domain controller replication (machine accounts ending in $ are filtered)
+- Identity sync service account - allowlist by name in production
+level: critical

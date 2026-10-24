@@ -1,0 +1,31 @@
+title: PowerShell Encoded or Obfuscated Command Execution
+id: a1b2c3d4-0000-4000-8000-000000000002
+status: test
+description: Detects PowerShell launched with -EncodedCommand / -enc or script content containing FromBase64String
+  / DownloadString, a common obfuscation technique to hide payloads from command-line logging (T1059.001).
+references:
+- https://attack.mitre.org/techniques/T1059/001/
+author: Gilberto A. Cedillo Soto
+date: '2026-10-23'
+tags:
+- attack.execution
+- attack.defense_evasion
+- attack.t1059.001
+logsource:
+  product: windows
+  service: powershell
+detection:
+  selection_img:
+    Image|endswith: \powershell.exe
+  selection_cli:
+    CommandLine|contains:
+    - ' -enc '
+    - ' -EncodedCommand '
+    - FromBase64String
+    - DownloadString(
+    - Invoke-Expression
+  condition: selection_img and selection_cli
+falsepositives:
+- Legitimate admin scripts distributed as encoded commands by some management tools
+- Software installers invoking encoded PowerShell
+level: high
